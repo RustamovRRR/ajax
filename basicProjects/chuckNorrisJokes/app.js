@@ -4,11 +4,14 @@ const btn = document.querySelector(".btn");
 const content = document.querySelector(".content");
 const img = document.querySelector(".container img");
 
-btn.addEventListener("click", () => {
-  fetch(urlAPI)
-    .then((data) => data.json())
-    .then((response) => displayData(response))
-    .catch((err) => console.log(err));
+btn.addEventListener("click", async () => {
+  try {
+    const data = await fetch(urlAPI);
+    const response = await data.json();
+    displayData(response);
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 function displayData({ value: joke }) {
