@@ -1,16 +1,17 @@
 import getElement from "./getElement.js";
+import { hideLoading } from "./toggleLoading.js";
 
 const displayDrinks = ({ drinks }) => {
   const section = getElement(".section-center");
   const title = getElement(".title");
   if (!drinks) {
+    hideLoading();
     title.textContent = "there is no cocktail";
     section.innerHTML = null;
     return;
   }
   const result = drinks
     .map((drink) => {
-      //   console.log(drink);
       const { idDrink: id, strDrink: name, strDrinkThumb: image } = drink;
       return `<a href="drink.html">
           <article class="cocktail" data-id="${id}">
@@ -20,6 +21,7 @@ const displayDrinks = ({ drinks }) => {
         </a>`;
     })
     .join("");
+  hideLoading();
   title.textContent = "";
   section.innerHTML = result;
   return section;
